@@ -34,12 +34,82 @@ const Project = ({ slice }) => {
       className="md:p-12 max-md:p-6 max-w-[1400px] mx-auto"
     >
       <div className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4">
-        <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.title} components={components} />
+        <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
       </div>
-      <div className="">
-        <PhotoAlbum layout="rows" photos={photos} />
+      {/* <PhotoAlbum layout="masonry" photos={photos} /> */}
+      {/*  <div className="flex flex-wrap max-w-[1400px]">
+        {slice.items.map((item,index) =>{
+          const isEverySecondOrThird = (index ) % 3 === 1 || (index + 1) % 3 === 2;
+          return (
+            <Image
+              src={item.image.url}
+              objectFit="cover"
+              width={item.image.dimensions.width}
+              height={item.image.dimensions.height}
+              className={`${
+                isEverySecondOrThird ? "w-[75%]" : "w-[25%]"
+              } object-cover`}
+            />
+          );
+})}
+      </div> */}
+      <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,500px)] max-md:auto-rows-[minmax(0,200px)]">
+        {slice.items.map((item, index) => {
+          const totalImages = slice.items.length;
+          const isOddNumber = totalImages % 2 !== 0;
+          let colSpan;
+
+          if (isOddNumber && index === totalImages - 1) {
+            colSpan = "col-span-3 ";
+          } else {
+            if (isOddNumber) {
+              switch (index % 5) {
+                case 0:
+                case 3:
+                  colSpan = "col-span-1";
+                  break;
+                case 1:
+                case 2:
+                  colSpan = "col-span-2";
+                  break;
+                case 4:
+                  colSpan = "col-span-3";
+                  break;
+                default:
+                  colSpan = "col-span-1";
+                  break;
+              }
+            } else {
+              switch (index % 4) {
+                case 0:
+                case 3:
+                  colSpan = "col-span-1";
+                  break;
+                case 1:
+                case 2:
+                  colSpan = "col-span-2";
+                  break;
+                default:
+                  colSpan = "col-span-1";
+                  break;
+              }
+            }
+          }
+
+          return (
+            <div className={`${colSpan} w-full h-full`}>
+              <Image
+                src={item.image.url}
+                objectFit="cover"
+                width={item.image.dimensions.width}
+                height={item.image.dimensions.height}
+                className={`${colSpan} w-full h-full object-cover object-center`}
+              />
+            </div>
+          );
+        })}
       </div>
     </section>
   );
