@@ -23,7 +23,7 @@ const Project = ({ slice }) => {
       </h2>
     ),
     heading3: ({ children }) => (
-      <h3 className="first:mt-0 last:mb-0 text-size_base">{children}</h3>
+      <h3 className="first:mt-0 last:mb-0 text-size_base text-gray-600">{children}</h3>
     ),
   };
 
@@ -38,24 +38,7 @@ const Project = ({ slice }) => {
         <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
       </div>
-      {/* <PhotoAlbum layout="masonry" photos={photos} /> */}
-      {/*  <div className="flex flex-wrap max-w-[1400px]">
-        {slice.items.map((item,index) =>{
-          const isEverySecondOrThird = (index ) % 3 === 1 || (index + 1) % 3 === 2;
-          return (
-            <Image
-              src={item.image.url}
-              objectFit="cover"
-              width={item.image.dimensions.width}
-              height={item.image.dimensions.height}
-              className={`${
-                isEverySecondOrThird ? "w-[75%]" : "w-[25%]"
-              } object-cover`}
-            />
-          );
-})}
-      </div> */}
-      <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,500px)] max-md:auto-rows-[minmax(0,200px)]">
+      <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,350px)] max-md:auto-rows-[minmax(0,150px)]">
         {slice.items.map((item, index) => {
           const totalImages = slice.items.length;
           const isOddNumber = totalImages % 2 !== 0;
