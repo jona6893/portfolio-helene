@@ -1,0 +1,91 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "kort om mig",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Duis deserunt dolor exercitation ea cillum nostrud exercitation proident pariatur cupidatat magna laboris non in. Adipisicing consequat quis sint sint commodo esse nostrud dolore officia consectetur irure sint exercitation. Culpa nostrud cupidatat esse amet id sit eiusmod excepteur ea sint nostrud tempor."
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"icon",
+						{
+							"origin": {
+								"id": "AURzUUZQnWA",
+								"url": "https://images.unsplash.com/photo-1554894872-4e447dadac68?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxfHxtYWlsJTIwaWNvbnxlbnwwfHx8fDE2OTE3MDczNTJ8MA&ixlib=rb-4.0.3&q=85",
+								"width": 5184,
+								"height": 3456
+							},
+							"url": "https://images.unsplash.com/photo-1554894872-4e447dadac68?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxfHxtYWlsJTIwaWNvbnxlbnwwfHx8fDE2OTE3MDczNTJ8MA&ixlib=rb-4.0.3&q=85",
+							"width": 5184,
+							"height": 3456,
+							"edit": {
+								"background": "transparent",
+								"zoom": 1,
+								"crop": {
+									"x": 0,
+									"y": 0
+								}
+							},
+							"credits": null,
+							"alt": null,
+							"__TYPE__": "ImageContent",
+							"thumbnails": {}
+						}
+					],
+					[
+						"link_text",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Mail@me.com",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"link",
+						{
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "http://google.com"
+							}
+						}
+					]
+				]
+			}
+		]
+	}
+]
