@@ -2,7 +2,6 @@
 import * as prismic from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
-
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -22,7 +21,7 @@ export function Header({ navigation, settings }) {
     hidden: { opacity: 0 },
   };
 
-  useEffect(() =>{
+   useEffect(() =>{
     const body = document.querySelector("body")
     const header = document.getElementById("header");
 
@@ -34,7 +33,7 @@ export function Header({ navigation, settings }) {
     } else{
       body.classList.remove("overflow-hidden");
     }
-  },[toggle])
+  },[toggle]) 
 
 
   return (
@@ -43,7 +42,6 @@ export function Header({ navigation, settings }) {
         pathname === "/" ? "absolute z-10" : "relative"
       } left-0 right-0 text-gray-200 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
     >
-  
       <div className="flex md:p-12 max-md:p-6 justify-between max-w-[1440px] mx-auto w-full">
         <PrismicNextLink
           href="/"
@@ -62,7 +60,7 @@ export function Header({ navigation, settings }) {
         <nav className="">
           {/* Hamburger Menu */}
           <button
-            className="w-[25px] h-[25px] grid relative cursor-pointer z-[10]"
+            className={`${toggle && 'mr-[15px]'} w-[25px] h-[25px] grid relative cursor-pointer z-[10]`}
             onClick={(e) => {
               e.stopPropagation(); // Stop the event from bubbling up
               setToggle(!toggle);
@@ -95,14 +93,14 @@ export function Header({ navigation, settings }) {
             {toggle && (
               <div
                 id="header"
-  
-                className={`absolute z-[9] bg-slate-800/50 left-0 right-0 text-gray-200 max-md:px-8 md:px-12 py-6 h-screen w-screen inset-0
+                className={`absolute z-[9] bg-slate-800/70 left-0 right-0 text-gray-200 max-md:px-8 md:px-12 py-6 h-screen w-screen inset-0
            gap-x-6 gap-y-3 leading-none`}
                 onClick={(e) => {
                   e.stopPropagation();
                   setToggle(!toggle);
                 }}
               >
+                
                 <motion.ul
                   initial="hidden"
                   animate="visible"
