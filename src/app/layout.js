@@ -23,6 +23,7 @@ export default async function RootLayout({ children }) {
           content="This Website was built by Jonathan Weldon.
     If you're interested in having a website built, contact me at jona.weldon@icloud.com or visit weldon.dk"
         />
+         
       </head>
       <body className="relative overflow-x-hidden antialiased">
         {/* @ts-expect-error Async Server Component */}
