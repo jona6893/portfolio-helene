@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 export async function generateMetadata() {
   const client = createClient();
   const page = await client.getByUID("page", "home");
-
+/* hvyboyboubonoin */
   
   return {
     title: page.data.title,
