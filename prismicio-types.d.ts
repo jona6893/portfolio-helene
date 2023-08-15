@@ -261,9 +261,92 @@ export type AboutSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *About → Primary*
+ */
+export interface AboutSliceKontaktMedBilledePrimary {
+  /**
+   * Title field in *About → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Text field in *About → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Image field in *About → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *About → Items*
+ */
+export interface AboutSliceKontaktMedBilledeItem {
+  /**
+   * Icon field in *About → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Link Text field in *About → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Title for the link
+   * - **API ID Path**: about.items[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link_text: prismic.RichTextField;
+
+  /**
+   * Link field in *About → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: phone number, email, adresse, website or other
+   * - **API ID Path**: about.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Kontakt med billede variation for About Slice
+ *
+ * - **API ID**: `kontaktMedBillede`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutSliceKontaktMedBillede = prismic.SharedSliceVariation<
+  "kontaktMedBillede",
+  Simplify<AboutSliceKontaktMedBilledePrimary>,
+  Simplify<AboutSliceKontaktMedBilledeItem>
+>;
+
+/**
  * Slice variation for *About*
  */
-type AboutSliceVariation = AboutSliceDefault;
+type AboutSliceVariation = AboutSliceDefault | AboutSliceKontaktMedBillede;
 
 /**
  * About Shared Slice
@@ -783,6 +866,7 @@ declare module "@prismicio/client" {
       AboutSlice,
       AboutSliceVariation,
       AboutSliceDefault,
+      AboutSliceKontaktMedBillede,
       FooterSlice,
       FooterSliceVariation,
       FooterSliceDefault,

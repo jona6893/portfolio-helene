@@ -22,18 +22,31 @@ export function Header({ navigation, settings }) {
     hidden: { opacity: 0 },
   };
 
+  useEffect(() =>{
+    const body = document.querySelector("body")
+    const header = document.getElementById("header");
+
+    console.log(body)
+    if(toggle) {
+      header.scrollIntoView();
+      body.classList.add("overflow-hidden")
+
+    } else{
+      body.classList.remove("overflow-hidden");
+    }
+  },[toggle])
 
 
   return (
     <div
       className={`${
         pathname === "/" ? "absolute z-10" : "relative"
-      } left-0 right-0 text-gray-200 max-md:px-8 md:px-12 py-6 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
+      } left-0 right-0 text-gray-200 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
     >
-      <div className="flex justify-between max-w-[1400px] mx-auto w-full">
+      <div className="flex md:p-12 max-md:p-6 justify-between max-w-[1440px] mx-auto w-full">
         <PrismicNextLink
           href="/"
-          className={`text-size_md uppercase z-[1] ${
+          className={`text-size_md uppercase z-[10] ${
             pathname === "/" || toggle === true ? "text-gray-200" : "text-black"
           }`}
           onClick={(e) => {
@@ -48,7 +61,7 @@ export function Header({ navigation, settings }) {
         <nav className="">
           {/* Hamburger Menu */}
           <button
-            className="w-[25px] h-[25px] grid relative cursor-pointer z-[1]"
+            className="w-[25px] h-[25px] grid relative cursor-pointer z-[10]"
             onClick={(e) => {
               e.stopPropagation(); // Stop the event from bubbling up
               setToggle(!toggle);
@@ -59,29 +72,31 @@ export function Header({ navigation, settings }) {
                 toggle ? "rotate-45 translate-y-2.5" : "rotate-0"
               } duration-300 w-full ${
                 pathname === "/" || toggle === true ? "bg-gray-200" : "bg-black"
-              }  h-[1px]`}
+              }  h-[1.5px]`}
             />
             <div
               className={`top-[50%] ${
                 toggle ? "opacity-0 rotate-45" : "opacity-100"
               } duration-300 w-full  ${
                 pathname === "/" || toggle === true ? "bg-gray-200" : "bg-black"
-              }  h-[1px]`}
+              }  h-[1.5px]`}
             />
             <div
               className={`${
                 toggle ? "rotate-[-45deg] translate-y-[-0.425rem]" : "rotate-0"
               } duration-300 w-full  ${
                 pathname === "/" || toggle === true ? "bg-gray-200" : "bg-black"
-              } h-[1px]`}
+              } h-[1.5px]`}
             />
           </button>
 
           <AnimatePresence>
             {toggle && (
               <div
-                className={`absolute left-0 right-0 text-gray-200 max-md:px-8 md:px-12 py-6 h-screen w-screen inset-0
-          bg-gradient-to-b from-slate-800/50 to-slate-800/50 gap-x-6 gap-y-3 leading-none`}
+                id="header"
+  
+                className={`absolute z-[9] bg-slate-800/50 left-0 right-0 text-gray-200 max-md:px-8 md:px-12 py-6 h-screen w-screen inset-0
+           gap-x-6 gap-y-3 leading-none`}
                 onClick={(e) => {
                   e.stopPropagation();
                   setToggle(!toggle);
@@ -106,7 +121,7 @@ export function Header({ navigation, settings }) {
                     >
                       <PrismicNextLink
                         field={item.link}
-                        className={`hover:text-gray-400 text-gray-200 text-size_md`}
+                        className={`hover:text-gray-400 text-gray-200 text-size_md uppercase`}
                       >
                         <PrismicText field={item.label} />
                       </PrismicNextLink>

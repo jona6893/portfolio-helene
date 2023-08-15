@@ -1,13 +1,13 @@
 
 import "./globals.css";
-import { PrismicText } from "@prismicio/react";
-import { PrismicNextLink, PrismicPreview } from "@prismicio/next";
-import * as prismic from "@prismicio/client";
+import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio";
-import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
+import PageAnimated from "@/components/PageAnimated";
+
 
 export default async function RootLayout({ children }) {
+
  const client = createClient();
  const settings = await client.getSingle("settings");
  const navigation = await client.getSingle("navigation");
@@ -16,7 +16,9 @@ export default async function RootLayout({ children }) {
       <body className="relative overflow-x-hidden antialiased">
         {/* @ts-expect-error Async Server Component */}
         <Header settings={settings} navigation={navigation} />
+        <PageAnimated>
         {children}
+        </PageAnimated>
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
