@@ -60,7 +60,7 @@ export function Header({ navigation, settings }) {
         <nav className="">
           {/* Hamburger Menu */}
           <button
-            className={`${toggle && 'mr-[15px]'} w-[25px] h-[25px] grid relative cursor-pointer z-[10]`}
+            className={` w-[25px] h-[25px] grid relative cursor-pointer z-[10]`}
             onClick={(e) => {
               e.stopPropagation(); // Stop the event from bubbling up
               setToggle(!toggle);
