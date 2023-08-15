@@ -43,6 +43,7 @@ export function Header({ navigation, settings }) {
         pathname === "/" ? "absolute z-10" : "relative"
       } left-0 right-0 text-gray-200 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
     >
+  
       <div className="flex md:p-12 max-md:p-6 justify-between max-w-[1440px] mx-auto w-full">
         <PrismicNextLink
           href="/"
