@@ -7,7 +7,22 @@ import PageAnimated from "@/components/PageAnimated";
 
 
 
-
+export const metadata = {
+  title: '...',
+  description: '...',
+  icons:{
+    icon: [
+      '/favicon.icoj?v=4'
+    ],
+    apple:[
+      '/apple-touch-icon.png?v=4'
+    ],
+    shortcut:[
+      '/apple-touch-icon.png'
+    ]
+  },
+  manifest:'/site.manifest'
+}
 
 
 export default async function RootLayout({ children }) {
@@ -23,7 +38,7 @@ export default async function RootLayout({ children }) {
           content="This Website was built by Jonathan Weldon.
     If you're interested in having a website built, contact me at jona.weldon@icloud.com or visit weldon.dk"
         />
-         
+          <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
       </head>
       <body className="relative overflow-x-hidden antialiased">
         {/* @ts-expect-error Async Server Component */}
