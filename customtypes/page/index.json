@@ -33,7 +33,8 @@
             "gallery": { "type": "SharedSlice" },
             "about": { "type": "SharedSlice" },
             "footer": { "type": "SharedSlice" },
-            "project": { "type": "SharedSlice" }
+            "project": { "type": "SharedSlice" },
+            "project_navigation": { "type": "SharedSlice" }
           }
         }
       }

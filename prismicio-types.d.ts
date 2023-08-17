@@ -66,7 +66,8 @@ type PageDocumentDataSlicesSlice =
   | GallerySlice
   | AboutSlice
   | FooterSlice
-  | ProjectSlice;
+  | ProjectSlice
+  | ProjectNavigationSlice;
 
 /**
  * Content for Page documents
@@ -845,6 +846,61 @@ export type ProjectSlice = prismic.SharedSlice<
   ProjectSliceVariation
 >;
 
+/**
+ * Primary content in *ProjectNavigation → Items*
+ */
+export interface ProjectNavigationSliceDefaultItem {
+  /**
+   * ProjectCategorie field in *ProjectNavigation → Items*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_navigation.items[].projectcategorie
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  projectcategorie: prismic.TitleField;
+
+  /**
+   * Link field in *ProjectNavigation → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_navigation.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Default variation for ProjectNavigation Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectNavigationSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<ProjectNavigationSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ProjectNavigation*
+ */
+type ProjectNavigationSliceVariation = ProjectNavigationSliceDefault;
+
+/**
+ * ProjectNavigation Shared Slice
+ *
+ * - **API ID**: `project_navigation`
+ * - **Description**: ProjectNavigation
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectNavigationSlice = prismic.SharedSlice<
+  "project_navigation",
+  ProjectNavigationSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -881,6 +937,9 @@ declare module "@prismicio/client" {
       ProjectSlice,
       ProjectSliceVariation,
       ProjectSliceDefault,
+      ProjectNavigationSlice,
+      ProjectNavigationSliceVariation,
+      ProjectNavigationSliceDefault,
     };
   }
 }

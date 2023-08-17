@@ -8,4 +8,5 @@ export const components = {
   gallery: dynamic(() => import("./Gallery")),
   hero: dynamic(() => import("./Hero")),
   project: dynamic(() => import("./Project")),
+  project_navigation: dynamic(() => import("./ProjectNavigation")),
 };

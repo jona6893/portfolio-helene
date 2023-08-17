@@ -25,7 +25,6 @@ export function Header({ navigation, settings }) {
     const body = document.querySelector("body")
     const header = document.getElementById("header");
 
-    console.log(body)
     if(toggle) {
       header.scrollIntoView();
       body.classList.add("overflow-hidden")

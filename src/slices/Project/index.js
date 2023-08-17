@@ -9,10 +9,10 @@ import Image from "next/image";
  * @param {ProjectProps}
  */
 const Project = ({ slice }) => {
-  console.log(slice);
+  //console.log(slice);
   let photos = []
   slice.items.forEach(item => {
-    photos.push({src: item.image.url, width:item.image.dimensions.width, height: item.image.dimensions.height})
+    photos.push({src: item.image.url, width:item.image.dimensions?.width, height: item.image.dimensions?.height})
 
   })
 
@@ -33,7 +33,7 @@ const Project = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="md:p-12 max-md:p-6 max-w-[1400px] mx-auto"
     >
-      <div className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4">
+      <div className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4 text-center">
         <PrismicRichText field={slice.primary.title} components={components} />
         <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
@@ -86,8 +86,8 @@ const Project = ({ slice }) => {
               <Image
                 src={item.image.url}
                 objectFit="cover"
-                width={item.image.dimensions.width}
-                height={item.image.dimensions.height}
+                width={item.image.dimensions?.width}
+                height={item.image.dimensions?.height}
                 className={`${colSpan} w-full h-full object-cover object-center`}
               />
             </div>
