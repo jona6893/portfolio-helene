@@ -18,7 +18,7 @@ const Project = ({ slice }) => {
 
   const components = {
     heading2: ({ children }) => (
-      <h2 className="first:mt-0 last:mb-0 text-size_md underline decoration-1 decoration-gray-500 underline-offset-4">
+      <h2 className="first:mt-0 last:mb-0 text-size_md decoration-1 decoration-gray-500 underline-offset-4">
         {children}
       </h2>
     ),
