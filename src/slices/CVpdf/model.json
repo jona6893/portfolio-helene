@@ -1,0 +1,23 @@
+{
+  "id": "c_vpdf",
+  "type": "SharedSlice",
+  "name": "CVpdf",
+  "description": "CVpdf",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "pdf": {
+          "type": "Link",
+          "config": { "label": "PDF", "placeholder": "", "select": "media" }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

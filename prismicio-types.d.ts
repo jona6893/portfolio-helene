@@ -67,7 +67,8 @@ type PageDocumentDataSlicesSlice =
   | AboutSlice
   | FooterSlice
   | ProjectSlice
-  | ProjectNavigationSlice;
+  | ProjectNavigationSlice
+  | CVpdfSlice;
 
 /**
  * Content for Page documents
@@ -357,6 +358,48 @@ type AboutSliceVariation = AboutSliceDefault | AboutSliceKontaktMedBillede;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type AboutSlice = prismic.SharedSlice<"about", AboutSliceVariation>;
+
+/**
+ * Primary content in *CVpdf → Primary*
+ */
+export interface CVpdfSliceDefaultPrimary {
+  /**
+   * PDF field in *CVpdf → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: c_vpdf.primary.pdf
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  pdf: prismic.LinkToMediaField;
+}
+
+/**
+ * Default variation for CVpdf Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CVpdfSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CVpdfSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CVpdf*
+ */
+type CVpdfSliceVariation = CVpdfSliceDefault;
+
+/**
+ * CVpdf Shared Slice
+ *
+ * - **API ID**: `c_vpdf`
+ * - **Description**: CVpdf
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CVpdfSlice = prismic.SharedSlice<"c_vpdf", CVpdfSliceVariation>;
 
 /**
  * Primary content in *Footer → Primary*
@@ -923,6 +966,9 @@ declare module "@prismicio/client" {
       AboutSliceVariation,
       AboutSliceDefault,
       AboutSliceKontaktMedBillede,
+      CVpdfSlice,
+      CVpdfSliceVariation,
+      CVpdfSliceDefault,
       FooterSlice,
       FooterSliceVariation,
       FooterSliceDefault,

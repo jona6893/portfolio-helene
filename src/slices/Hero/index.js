@@ -28,24 +28,6 @@ const Hero = ({ slice }) => {
           className="pointer-events-none select-none object-cover"
         />
       )}
-      {/*  <Bounded yPadding="lg" className="relative">
-        <div className="grid justify-items-center gap-8">
-          <div className="max-w-2xl text-center">
-            <PrismicRichText
-              field={slice.primary.text}
-              components={components}
-            />
-          </div>
-          {prismic.isFilled.link(slice.primary.buttonLink) && (
-            <PrismicNextLink
-              field={slice.primary.buttonLink}
-              className="rounded bg-white px-5 py-3 font-medium text-slate-800"
-            >
-              {slice.primary.buttonText || "Learn More"}
-            </PrismicNextLink>
-          )}
-        </div>
-      </Bounded> */}
     </section>
   );
 };
