@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap');
-
-h1,h2,h3,h4,h5,p,a,li{
-    font-family: 'Raleway', sans-serif;
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+  @import url("https://use.typekit.net/dop0ujn.css");
+h1,a, h2, h3{
+    /* font-family: 'Raleway', sans-serif; */
+    font-family: 'Bebas Neue', sans-serif;
+                                                
+}
+h4,h5,p,li{
+     /* font-family: 'Raleway', sans-serif;  */
+    /* font-family: 'Bebas Neue', sans-serif; */
+    font-family: 'Helvetica Neue', sans-serif;
+                                                
 }
 
 .fillSpace{

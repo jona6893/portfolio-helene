@@ -1,16 +1,18 @@
 "use client";
 import * as prismic from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { PrismicRichText } from "./PrismicRichText";
 
 export function Header({ navigation, settings }) {
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const pathname = usePathname();
- 
+
   const listItemVariants = {
     visible: (index) => ({
       opacity: 1,
@@ -21,18 +23,101 @@ export function Header({ navigation, settings }) {
     hidden: { opacity: 0 },
   };
 
-   useEffect(() =>{
-    const body = document.querySelector("body")
+  useEffect(() => {
+    const body = document.querySelector("body");
     const header = document.getElementById("header");
 
-    if(toggle) {
+    if (toggle) {
       header.scrollIntoView();
-      body.classList.add("overflow-hidden")
-
-    } else{
+      body.classList.add("overflow-hidden");
+    } else {
       body.classList.remove("overflow-hidden");
     }
-  },[toggle]) 
+  }, [toggle]);
+  
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setHasScrolled(true);
+    } else {
+      setHasScrolled(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
+const iconsVariants = {
+  initial: {
+    position: "relative",
+    bottom: "0px",
+    right: "0px",
+  },
+  scrolled: {
+    position: "fixed",
+    bottom: "20px",
+    left: "3rem",
+    transition: {
+      type: "spring",
+      damping: 10,
+      stiffness: 80,
+      duration: 0.5,
+    },
+  },
+};
+
+const soMeColors = () =>{
+
+  if (pathname === "/") {
+    if (toggle === true) {
+      return true
+    }
+      if (hasScrolled === true) {
+        console.log(false);
+        return false;
+      } else if (hasScrolled === false) {
+        console.log(true);
+        return true;
+      }
+  } else {
+    if (toggle === true) {
+      return true;
+    }
+    if (hasScrolled === true) {
+         console.log(true);
+      return false;
+    } else if (hasScrolled === false) {
+         
+      return false;
+    }
+  }
+
+}
+const iconText = {
+  paragraph: ({ children }) => (
+    <p
+      className={`${
+        hasScrolled ? "block" : "max-[1440px]:hidden"
+      }`}
+    >
+      {children}
+    </p>
+  ),
+};
+const iconTextMobile = {
+  paragraph: ({ children }) => (
+    <p
+      className={``}
+    >
+      {children}
+    </p>
+  ),
+};
 
 
   return (
@@ -41,10 +126,45 @@ export function Header({ navigation, settings }) {
         pathname === "/" ? "absolute z-10" : "relative"
       } left-0 right-0 text-gray-200 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
     >
-      <div className="flex md:p-12 max-md:p-6 justify-between max-w-[1440px] mx-auto w-full">
-        <PrismicNextLink
+      <div
+        className={`md:grid max-md:flex max-md:justify-between md:grid-cols-3 md:p-12 max-md:p-6 justify-items-center max-w-[1440px] mx-auto w-full`}
+      >
+        <div className="max-md:hidden">
+          <motion.ul
+            className={`flex gap-4 z-10 ${
+              hasScrolled &&
+              "bg-white/70 backdrop-blur w-fit px-4 py-4 rounded-lg  justify-center"
+            }`}
+            initial="initial"
+            animate={hasScrolled ? "scrolled" : "initial"}
+            variants={iconsVariants}
+          >
+            {settings.data.slices[0].items.map((item, index) => (
+              <li key={index * 18} className="  group">
+                <PrismicNextLink
+                  field={item.link}
+                  className={`flex gap-2 items-center group-hover:text-gray-600 ${
+                    soMeColors() ? "text-white" : "text-black"
+                  }`}
+                >
+                  <PrismicNextImage
+                    field={item.icon}
+                    className={`w-6 h-6 ${
+                      soMeColors() ? "invert" : "invert-1"
+                    }`}
+                  />
+                  <PrismicRichText
+                    field={item.link_text}
+                    components={iconText}
+                  />
+                </PrismicNextLink>
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+        <a
           href="/"
-          className={`text-size_md uppercase z-[10] ${
+          className={`uppercase z-[10] ${
             pathname === "/" || toggle === true ? "text-gray-200" : "text-black"
           }`}
           onClick={(e) => {
@@ -54,12 +174,14 @@ export function Header({ navigation, settings }) {
             }
           }}
         >
-          <PrismicText field={settings.data.siteTitle} />
-        </PrismicNextLink>
-        <nav className="">
+          <h1 className="text-size_lg">
+            <PrismicText field={settings.data.siteTitle} />
+          </h1>
+        </a>
+        <nav className="w-full flex justify-end">
           {/* Hamburger Menu */}
           <button
-            className={` w-[25px] h-[25px] grid relative cursor-pointer z-[10]`}
+            className={` w-[35px] h-[35px] grid relative cursor-pointer z-[10]`}
             onClick={(e) => {
               e.stopPropagation(); // Stop the event from bubbling up
               setToggle(!toggle);
@@ -67,7 +189,7 @@ export function Header({ navigation, settings }) {
           >
             <div
               className={`${
-                toggle ? "rotate-45 translate-y-2.5" : "rotate-0"
+                toggle ? "rotate-45 translate-y-[0.5rem]" : "rotate-0"
               } duration-300 w-full ${
                 pathname === "/" || toggle === true ? "bg-gray-200" : "bg-black"
               }  h-[1.5px]`}
@@ -81,7 +203,7 @@ export function Header({ navigation, settings }) {
             />
             <div
               className={`${
-                toggle ? "rotate-[-45deg] translate-y-[-0.425rem]" : "rotate-0"
+                toggle ? "rotate-[-45deg] translate-y-[-1rem]" : "rotate-0"
               } duration-300 w-full  ${
                 pathname === "/" || toggle === true ? "bg-gray-200" : "bg-black"
               } h-[1.5px]`}
@@ -99,12 +221,11 @@ export function Header({ navigation, settings }) {
                   setToggle(!toggle);
                 }}
               >
-                
                 <motion.ul
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-32 max-w-[1400px] flex flex-col gap-6 md:gap-10 text-right"
+                  className="mt-32 max-w-[1400px] mx-auto flex flex-col gap-6 md:gap-10 text-right"
                 >
                   {navigation.data?.links.map((item, index) => (
                     <motion.li
@@ -125,6 +246,37 @@ export function Header({ navigation, settings }) {
                       </PrismicNextLink>
                     </motion.li>
                   ))}
+
+                  <motion.ul
+                    variants={listItemVariants}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setToggle(!toggle);
+                    }}
+                    className="grid gap-4 justify-end mt-8"
+                  >
+                    {settings.data.slices[0].items.map((item, index) => (
+                      <li key={index * 18} className="  group">
+                        <PrismicNextLink
+                          field={item.link}
+                          className={`flex gap-2 justify-end items-center group-hover:text-gray-600 ${
+                            soMeColors() ? "text-white" : "text-black"
+                          }`}
+                        >
+                          <PrismicRichText
+                            field={item.link_text}
+                            components={iconTextMobile}
+                          />
+                          <PrismicNextImage
+                            field={item.icon}
+                            className={`w-6 h-6 ${
+                              soMeColors() ? "invert" : "invert-1"
+                            }`}
+                          />
+                        </PrismicNextLink>
+                      </li>
+                    ))}
+                  </motion.ul>
                 </motion.ul>
               </div>
             )}

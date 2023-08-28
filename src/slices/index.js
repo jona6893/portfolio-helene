@@ -10,4 +10,5 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   project: dynamic(() => import("./Project")),
   project_navigation: dynamic(() => import("./ProjectNavigation")),
+  so_me: dynamic(() => import("./SoMe")),
 };

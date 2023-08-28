@@ -21,6 +21,7 @@ function ShortAbout({title, text, slice}) {
           ))}
         </ul>
       </div>
+
       <PrismicRichText field={slice.primary.text} components={text} />
       <ul className="md:hidden max-md:block">
         {slice.items.map((item, index) => (

@@ -152,6 +152,8 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
+type SettingsDocumentDataSlicesSlice = SoMeSlice;
+
 /**
  * Content for Settings documents
  */
@@ -166,6 +168,17 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   siteTitle: prismic.TitleField;
+
+  /**
+   * Slice Zone field in *Settings*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice>;
 }
 
 /**
@@ -752,26 +765,6 @@ export interface HeroSliceDefaultPrimary {
   text: prismic.RichTextField;
 
   /**
-   * Button Link field in *Hero → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.primary.buttonLink
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  buttonLink: prismic.LinkField;
-
-  /**
-   * Button Text field in *Hero → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.primary.buttonText
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  buttonText: prismic.KeyTextField;
-
-  /**
    * Background Image field in *Hero → Primary*
    *
    * - **Field Type**: Image
@@ -780,6 +773,51 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   backgroundImage: prismic.ImageField<never>;
+
+  /**
+   * Link To Project field in *Hero → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.link_to_project
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_to_project: prismic.LinkField;
+}
+
+/**
+ * Primary content in *Hero → Items*
+ */
+export interface HeroSliceDefaultItem {
+  /**
+   * Icon field in *Hero → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Link Text field in *Hero → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.items[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link_text: prismic.RichTextField;
+
+  /**
+   * Link field in *Hero → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
 }
 
 /**
@@ -792,7 +830,7 @@ export interface HeroSliceDefaultPrimary {
 export type HeroSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<HeroSliceDefaultPrimary>,
-  never
+  Simplify<HeroSliceDefaultItem>
 >;
 
 /**
@@ -944,6 +982,68 @@ export type ProjectNavigationSlice = prismic.SharedSlice<
   ProjectNavigationSliceVariation
 >;
 
+/**
+ * Primary content in *SoMe → Items*
+ */
+export interface SoMeSliceDefaultItem {
+  /**
+   * Icon field in *SoMe → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: so_me.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Link Text field in *SoMe → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: so_me.items[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link_text: prismic.RichTextField;
+
+  /**
+   * Link field in *SoMe → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: so_me.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Default variation for SoMe Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SoMeSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<SoMeSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *SoMe*
+ */
+type SoMeSliceVariation = SoMeSliceDefault;
+
+/**
+ * SoMe Shared Slice
+ *
+ * - **API ID**: `so_me`
+ * - **Description**: SoMe
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SoMeSlice = prismic.SharedSlice<"so_me", SoMeSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -961,6 +1061,7 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
+      SettingsDocumentDataSlicesSlice,
       AllDocumentTypes,
       AboutSlice,
       AboutSliceVariation,
@@ -986,6 +1087,9 @@ declare module "@prismicio/client" {
       ProjectNavigationSlice,
       ProjectNavigationSliceVariation,
       ProjectNavigationSliceDefault,
+      SoMeSlice,
+      SoMeSliceVariation,
+      SoMeSliceDefault,
     };
   }
 }

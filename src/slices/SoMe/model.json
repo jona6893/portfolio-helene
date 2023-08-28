@@ -1,0 +1,36 @@
+{
+  "id": "so_me",
+  "type": "SharedSlice",
+  "name": "SoMe",
+  "description": "SoMe",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "icon": {
+          "type": "Image",
+          "config": { "label": "Icon", "constraint": {}, "thumbnails": [] }
+        },
+        "link_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Link Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": { "label": "Link", "placeholder": "", "select": null }
+        }
+      }
+    }
+  ]
+}

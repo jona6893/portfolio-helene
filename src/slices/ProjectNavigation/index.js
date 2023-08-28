@@ -1,6 +1,7 @@
 "use client";
 import { PrismicRichText } from "@/components/PrismicRichText";
 import { PrismicNextLink } from "@prismicio/next";
+import { nanoid } from "nanoid";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -38,6 +39,7 @@ const ProjectNavigation = ({ slice }) => {
           //console.log(slice.items[index].projectcategorie[0].text);
           return (
             <PrismicNextLink
+              key={nanoid()}
               field={item.link}
               className={`${
                 pathname.substring(1) == title &&

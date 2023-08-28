@@ -26,6 +26,7 @@ const Project = ({ slice }) => {
       <h3 className="first:mt-0 last:mb-0 text-size_base text-gray-600">{children}</h3>
     ),
   };
+ 
 
   return (
     <section
@@ -33,11 +34,15 @@ const Project = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="md:p-12 max-md:p-6 max-w-[1400px] mx-auto"
     >
-      <div className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4 text-center">
+      <a
+        id={slice.primary.title[0].text.split(" ").join("")}
+        href={'#'+slice.primary.title[0].text.split(" ").join("")}
+        className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4 text-center"
+      >
         <PrismicRichText field={slice.primary.title} components={components} />
         <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
-      </div>
+      </a>
       <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,350px)] max-md:auto-rows-[minmax(0,150px)]">
         {slice.items.map((item, index) => {
           const totalImages = slice.items.length;
@@ -82,13 +87,14 @@ const Project = ({ slice }) => {
           }
 
           return (
-            <div className={`${colSpan} w-full h-full`}>
+            <div key={nanoid()} className={`${colSpan} w-full h-full`}>
               <Image
                 src={item.image.url}
                 objectFit="cover"
                 width={item.image.dimensions?.width}
                 height={item.image.dimensions?.height}
                 className={`${colSpan} w-full h-full object-cover object-center`}
+                alt="dfij"
               />
             </div>
           );
