@@ -164,7 +164,7 @@ const iconTextMobile = {
         </div>
         <a
           href="/"
-          className={`uppercase z-[10] ${
+          className={`uppercase z-[10] w-full ${
             pathname === "/" || toggle === true ? "text-gray-200" : "text-black"
           }`}
           onClick={(e) => {
@@ -178,7 +178,7 @@ const iconTextMobile = {
             <PrismicText field={settings.data.siteTitle} />
           </h1>
         </a>
-        <nav className="w-full flex justify-end">
+        <nav className="md:w-full flex justify-end">
           {/* Hamburger Menu */}
           <button
             className={` w-[35px] h-[35px] grid relative cursor-pointer z-[10]`}
