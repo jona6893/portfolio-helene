@@ -9,7 +9,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Slave"
+							"text": "Apple"
 						}
 					}
 				]
@@ -20,7 +20,7 @@
 					{
 						"type": "heading3",
 						"content": {
-							"text": "Treated"
+							"text": "Receive"
 						}
 					}
 				]
@@ -31,12 +31,12 @@
 					{
 						"type": "heading3",
 						"content": {
-							"text": "Special"
+							"text": "Theory"
 						}
 					}
 				]
 			},
-			"videolink": {
+			"lyd_fil": {
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
@@ -47,34 +47,7 @@
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
-				"value": [
-					[
-						"image",
-						{
-							"origin": {
-								"id": "main",
-								"url": "https://images.unsplash.com/photo-1589321599763-d66926c29613",
-								"width": 3168,
-								"height": 4752
-							},
-							"url": "https://images.unsplash.com/photo-1589321599763-d66926c29613",
-							"width": 3168,
-							"height": 4752,
-							"edit": {
-								"zoom": 1,
-								"crop": {
-									"x": 0,
-									"y": 0
-								},
-								"background": "transparent"
-							},
-							"credits": null,
-							"alt": null,
-							"__TYPE__": "ImageContent",
-							"thumbnails": {}
-						}
-					]
-				]
+				"value": []
 			}
 		]
 	}

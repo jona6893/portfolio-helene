@@ -64,8 +64,8 @@ const iconsVariants = {
     left: "3rem",
     transition: {
       type: "spring",
-      damping: 10,
-      stiffness: 80,
+      damping: 40,
+      stiffness: 140,
       duration: 0.5,
     },
   },

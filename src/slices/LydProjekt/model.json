@@ -1,8 +1,8 @@
 {
-  "id": "project",
+  "id": "lyd_projekt",
   "type": "SharedSlice",
-  "name": "Project",
-  "description": "Project",
+  "name": "LydProjekt",
+  "description": "LydProjekt",
   "variations": [
     {
       "id": "default",
@@ -25,7 +25,7 @@
           "type": "StructuredText",
           "config": {
             "label": "Text 1",
-            "placeholder": "Optional text",
+            "placeholder": "",
             "allowTargetBlank": true,
             "single": "heading3"
           }
@@ -34,27 +34,22 @@
           "type": "StructuredText",
           "config": {
             "label": "Text 2",
-            "placeholder": "Optional Text",
+            "placeholder": "",
             "allowTargetBlank": true,
             "single": "heading3"
           }
         },
-        "videolink": {
+        "lyd_fil": {
           "type": "Link",
           "config": {
-            "label": "VideoLink",
-            "placeholder": "Link To Youtube or Vimeo Video",
+            "label": "Lyd Fil",
+            "placeholder": "",
             "allowTargetBlank": false,
             "select": null
           }
         }
       },
-      "items": {
-        "image": {
-          "type": "Image",
-          "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-        }
-      }
+      "items": {}
     }
   ]
 }

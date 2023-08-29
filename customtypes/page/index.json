@@ -35,7 +35,8 @@
             "footer": { "type": "SharedSlice" },
             "project": { "type": "SharedSlice" },
             "project_navigation": { "type": "SharedSlice" },
-            "c_vpdf": { "type": "SharedSlice" }
+            "c_vpdf": { "type": "SharedSlice" },
+            "lyd_projekt": { "type": "SharedSlice" }
           }
         }
       }

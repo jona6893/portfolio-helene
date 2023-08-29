@@ -8,6 +8,7 @@ export const components = {
   footer: dynamic(() => import("./Footer")),
   gallery: dynamic(() => import("./Gallery")),
   hero: dynamic(() => import("./Hero")),
+  lyd_projekt: dynamic(() => import("./LydProjekt")),
   project: dynamic(() => import("./Project")),
   project_navigation: dynamic(() => import("./ProjectNavigation")),
   so_me: dynamic(() => import("./SoMe")),

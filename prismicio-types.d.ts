@@ -68,7 +68,8 @@ type PageDocumentDataSlicesSlice =
   | FooterSlice
   | ProjectSlice
   | ProjectNavigationSlice
-  | CVpdfSlice;
+  | CVpdfSlice
+  | LydProjektSlice;
 
 /**
  * Content for Page documents
@@ -848,6 +849,81 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *LydProjekt → Primary*
+ */
+export interface LydProjektSliceDefaultPrimary {
+  /**
+   * Title field in *LydProjekt → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lyd_projekt.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Text 1 field in *LydProjekt → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lyd_projekt.primary.text_1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text_1: prismic.TitleField;
+
+  /**
+   * Text 2 field in *LydProjekt → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lyd_projekt.primary.text_2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text_2: prismic.TitleField;
+
+  /**
+   * Lyd Fil field in *LydProjekt → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lyd_projekt.primary.lyd_fil
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  lyd_fil: prismic.LinkField;
+}
+
+/**
+ * Default variation for LydProjekt Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LydProjektSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LydProjektSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LydProjekt*
+ */
+type LydProjektSliceVariation = LydProjektSliceDefault;
+
+/**
+ * LydProjekt Shared Slice
+ *
+ * - **API ID**: `lyd_projekt`
+ * - **Description**: LydProjekt
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LydProjektSlice = prismic.SharedSlice<
+  "lyd_projekt",
+  LydProjektSliceVariation
+>;
+
+/**
  * Primary content in *Project → Primary*
  */
 export interface ProjectSliceDefaultPrimary {
@@ -880,6 +956,16 @@ export interface ProjectSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text_2: prismic.TitleField;
+
+  /**
+   * VideoLink field in *Project → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Link To Youtube or Vimeo Video
+   * - **API ID Path**: project.primary.videolink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  videolink: prismic.LinkField;
 }
 
 /**
@@ -1081,6 +1167,9 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceVariation,
       HeroSliceDefault,
+      LydProjektSlice,
+      LydProjektSliceVariation,
+      LydProjektSliceDefault,
       ProjectSlice,
       ProjectSliceVariation,
       ProjectSliceDefault,

@@ -1,8 +1,9 @@
 "use client";
 import { PrismicRichText } from "@/components/PrismicRichText";
-import PhotoAlbum from "react-photo-album";
 import { nanoid } from "nanoid";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
 /**
  * @typedef {import("@prismicio/client").Content.ProjectSlice} ProjectSlice
  * @typedef {import("@prismicio/react").SliceComponentProps<ProjectSlice>} ProjectProps
@@ -15,6 +16,9 @@ const Project = ({ slice }) => {
     photos.push({src: item.image.url, width:item.image.dimensions?.width, height: item.image.dimensions?.height})
 
   })
+  const ReactPlayer = dynamic(() => import("react-player"), {
+    ssr: false, // This will load the component only on client side
+  });
 
   const components = {
     heading2: ({ children }) => (
@@ -27,7 +31,7 @@ const Project = ({ slice }) => {
     ),
   };
  
-
+ 
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -36,13 +40,18 @@ const Project = ({ slice }) => {
     >
       <a
         id={slice.primary.title[0].text.split(" ").join("")}
-        href={'#'+slice.primary.title[0].text.split(" ").join("")}
+        href={"#" + slice.primary.title[0].text.split(" ").join("")}
         className="flex flex-wrap items-center justify-evenly max-md:gap-4 md:gap-8 mb-4 text-center"
       >
         <PrismicRichText field={slice.primary.title} components={components} />
         <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
       </a>
+      {slice.primary?.videolink?.url && 
+        <div className="w-full h-full mx-auto p-4">
+       <ReactPlayer className="mx-auto w-full h-full" url={slice.primary.videolink.url} controls={true} />
+       </div>
+    }
       <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,350px)] max-md:auto-rows-[minmax(0,150px)]">
         {slice.items.map((item, index) => {
           const totalImages = slice.items.length;
