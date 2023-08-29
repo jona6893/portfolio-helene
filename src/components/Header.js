@@ -129,7 +129,7 @@ const iconTextMobile = {
       <div
         className={`md:grid max-md:flex max-md:justify-between md:grid-cols-3 md:p-12 max-md:p-6 justify-items-center max-w-[1440px] mx-auto w-full`}
       >
-        <div className="max-md:hidden">
+        <div className="max-md:hidden w-full">
           <motion.ul
             className={`flex gap-4 z-10 ${
               hasScrolled &&
