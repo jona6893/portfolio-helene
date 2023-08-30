@@ -30,9 +30,9 @@ const LydProjekt = ({ slice }) => {
       <a
         id={slice.primary.title[0].text.split(" ").join("")}
         href={"#" + slice.primary.title[0].text.split(" ").join("")}
-        className="group hover:bg-gray-100 grid grid-cols-3  items-center max-md:gap-4 md:gap-8 mb-4 text-center"
+        className="group hover:bg-gray-100 md:grid md:grid-cols-3 max-md:flex flex-col items-center max-md:gap-4 md:gap-8 mb-4 text-center"
       >
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col md:items-start max-md:items-center max-md:col-start-1 max-md:row-start-1">
           <PrismicRichText
             field={slice.primary.title}
             components={components}
@@ -42,15 +42,18 @@ const LydProjekt = ({ slice }) => {
             components={components}
           />
         </div>
-        <div className="flex justify-start">
-        <PrismicRichText field={slice.primary.text_2} components={components} />
+        <div className="flex justify-start max-md:col-start-1 max-md:row-start-1">
+          <PrismicRichText
+            field={slice.primary.text_2}
+            components={components}
+          />
         </div>
-        
-          {slice.primary.lyd_fil?.url &&
-          <audio className="group-hover:bg-gray-100 w-full" controls>
-            <source src={slice.primary.lyd_fil.url} type="audio/ogg"></source>
-          </audio>}
 
+        {slice.primary.lyd_fil?.url && (
+          <audio className="group-hover:bg-gray-100 w-full" controls>
+            <source src={slice.primary.lyd_fil.url} type="audio/mpeg"></source>
+          </audio>
+        )}
       </a>
     </section>
   );

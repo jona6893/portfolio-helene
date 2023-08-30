@@ -47,11 +47,19 @@ const Project = ({ slice }) => {
         <PrismicRichText field={slice.primary.text_1} components={components} />
         <PrismicRichText field={slice.primary.text_2} components={components} />
       </a>
-      {slice.primary?.videolink?.url && 
-        <div className="w-full h-full mx-auto p-4">
-       <ReactPlayer className="mx-auto w-full h-full" url={slice.primary.videolink.url} controls={true} />
-       </div>
-    }
+      {slice.primary?.videolink?.url && (
+        <div className="w-full h-full mx-auto pb-2">
+          <div className="mx-auto max-w-[1440px] aspect-[16/9]">
+            <ReactPlayer
+              className="mx-auto"
+              height={"100%"}
+              width={"100%"}
+              url={slice.primary.videolink.url}
+              controls={true}
+            />
+          </div>
+        </div>
+      )}
       <div className="grid grid-cols-3 md:gap-6 max-md:gap-3 max-w-[1400px] md:auto-rows-[minmax(0,350px)] max-md:auto-rows-[minmax(0,150px)]">
         {slice.items.map((item, index) => {
           const totalImages = slice.items.length;

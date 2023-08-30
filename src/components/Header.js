@@ -10,6 +10,7 @@ import { PrismicRichText } from "./PrismicRichText";
 export function Header({ navigation, settings }) {
   const [toggle, setToggle] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+   const [atBottom, setAtBottom] = useState(false);
 
   const pathname = usePathname();
 
@@ -35,41 +36,52 @@ export function Header({ navigation, settings }) {
     }
   }, [toggle]);
   
+/* Animation Scroll conditions */
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
 
-useEffect(() => {
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setHasScrolled(true);
-    } else {
-      setHasScrolled(false);
-    }
-  };
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 25) {
+        setAtBottom(true);
+      } else {
+        setAtBottom(false);
+      }
+    };
 
-  window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-const iconsVariants = {
-  initial: {
-    position: "relative",
-    bottom: "0px",
-    right: "0px",
-  },
-  scrolled: {
-    position: "fixed",
-    bottom: "20px",
-    left: "3rem",
-    transition: {
-      type: "spring",
-      damping: 40,
-      stiffness: 140,
-      duration: 0.5,
-    },
-  },
-};
+ /* Animation KeyFrames */
+ const iconsVariants = {
+   initial: {
+     position: "relative",
+     bottom: "0px",
+     right: "0px",
+     background: "transparent",
+     width: "max-content",
+   },
+   scrolled: {
+     position: "fixed",
+     background: "white",
+     bottom: "2rem",
+     left: "3rem",
+     width: "max-content",
+     transition: {
+       type: "spring",
+       damping: 40,
+       stiffness: 140,
+       duration: 0.3,
+     },
+   },
+ };
 
 const soMeColors = () =>{
 
@@ -127,13 +139,13 @@ const iconTextMobile = {
       } left-0 right-0 text-gray-200 w-full flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none`}
     >
       <div
-        className={`md:grid max-md:flex max-md:justify-between md:grid-cols-3 md:p-12 max-md:p-6 justify-items-center max-w-[1440px] mx-auto w-full`}
+        className={`md:grid max-md:flex gap-2 max-md:justify-between md:grid-cols-header items-center md:p-12 max-md:p-6 justify-items-center max-w-[1440px] mx-auto w-full`}
       >
         <div className="max-md:hidden w-full">
           <motion.ul
             className={`flex gap-4 z-10 ${
               hasScrolled &&
-              "bg-white/70 backdrop-blur w-fit px-4 py-4 rounded-lg  justify-center"
+              "w-max px-4 py-4 rounded-lg  justify-center"
             }`}
             initial="initial"
             animate={hasScrolled ? "scrolled" : "initial"}
@@ -143,7 +155,7 @@ const iconTextMobile = {
               <li key={index * 18} className="  group">
                 <PrismicNextLink
                   field={item.link}
-                  className={`flex gap-2 items-center group-hover:text-gray-600 ${
+                  className={`flex gap-2 items-center group-hover:text-gray-600 w-full ${
                     soMeColors() ? "text-white" : "text-black"
                   }`}
                 >
@@ -162,9 +174,10 @@ const iconTextMobile = {
             ))}
           </motion.ul>
         </div>
+
         <a
           href="/"
-          className={`uppercase z-[10] w-full ${
+          className={`uppercase z-[10]  ${
             pathname === "/" || toggle === true ? "text-gray-200" : "text-black"
           }`}
           onClick={(e) => {
@@ -178,8 +191,8 @@ const iconTextMobile = {
             <PrismicText field={settings.data.siteTitle} />
           </h1>
         </a>
-        <nav className="md:w-full flex justify-end">
-          {/* Hamburger Menu */}
+        {/* Hamburger Menu */}
+        <nav className="md:w-full flex justify-end ">
           <button
             className={` w-[35px] h-[35px] grid relative cursor-pointer z-[10]`}
             onClick={(e) => {
@@ -240,7 +253,7 @@ const iconTextMobile = {
                     >
                       <PrismicNextLink
                         field={item.link}
-                        className={`hover:text-gray-400 text-gray-200 text-size_md uppercase`}
+                        className={`hover:text-gray-400 text-gray-200 md:text-size_md max-md:text-size_lg uppercase`}
                       >
                         <PrismicText field={item.label} />
                       </PrismicNextLink>
