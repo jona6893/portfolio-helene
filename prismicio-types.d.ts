@@ -309,6 +309,16 @@ export interface AboutSliceKontaktMedBilledePrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * PDF field in *About → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.primary.pdf
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  pdf: prismic.LinkField;
 }
 
 /**

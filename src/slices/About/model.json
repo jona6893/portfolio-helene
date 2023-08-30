@@ -85,6 +85,10 @@
         "image": {
           "type": "Image",
           "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+        },
+        "pdf": {
+          "type": "Link",
+          "config": { "label": "PDF", "placeholder": "", "select": null }
         }
       },
       "items": {
