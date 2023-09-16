@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PrismicRichText } from "./PrismicRichText";
+import ContactAnimation from "./ContactAnimation";
 
 export function Header({ navigation, settings }) {
   const [toggle, setToggle] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-   const [atBottom, setAtBottom] = useState(false);
+
 
   const pathname = usePathname();
 
@@ -36,52 +37,6 @@ export function Header({ navigation, settings }) {
     }
   }, [toggle]);
   
-/* Animation Scroll conditions */
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
-
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 25) {
-        setAtBottom(true);
-      } else {
-        setAtBottom(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
- /* Animation KeyFrames */
- const iconsVariants = {
-   initial: {
-     position: "relative",
-     bottom: "0px",
-     right: "0px",
-     background: "transparent",
-     width: "max-content",
-   },
-   scrolled: {
-     position: "fixed",
-     background: "white",
-     bottom: "2rem",
-     left: "3rem",
-     width: "max-content",
-     transition: {
-       type: "spring",
-       damping: 40,
-       stiffness: 140,
-       duration: 0.3,
-     },
-   },
- };
 
 const soMeColors = () =>{
 
@@ -90,10 +45,10 @@ const soMeColors = () =>{
       return true
     }
       if (hasScrolled === true) {
-        console.log(false);
+        //console.log(false);
         return false;
       } else if (hasScrolled === false) {
-        console.log(true);
+        //console.log(true);
         return true;
       }
   } else {
@@ -101,7 +56,7 @@ const soMeColors = () =>{
       return true;
     }
     if (hasScrolled === true) {
-         console.log(true);
+         //console.log(true);
       return false;
     } else if (hasScrolled === false) {
          
@@ -142,37 +97,13 @@ const iconTextMobile = {
         className={`md:grid max-md:flex gap-2 max-md:justify-between md:grid-cols-header items-center md:p-12 max-md:p-6 justify-items-center max-w-[1440px] mx-auto w-full`}
       >
         <div className="max-md:hidden w-full">
-          <motion.ul
-            className={`flex gap-4 z-10 ${
-              hasScrolled &&
-              "w-max px-4 py-4 rounded-lg  justify-center"
-            }`}
-            initial="initial"
-            animate={hasScrolled ? "scrolled" : "initial"}
-            variants={iconsVariants}
-          >
-            {settings.data.slices[0].items.map((item, index) => (
-              <li key={index * 18} className="  group">
-                <PrismicNextLink
-                  field={item.link}
-                  className={`flex gap-2 items-center group-hover:text-gray-600 w-full ${
-                    soMeColors() ? "text-white" : "text-black"
-                  }`}
-                >
-                  <PrismicNextImage
-                    field={item.icon}
-                    className={`w-6 h-6 ${
-                      soMeColors() ? "invert" : "invert-1"
-                    }`}
-                  />
-                  <PrismicRichText
-                    field={item.link_text}
-                    components={iconText}
-                  />
-                </PrismicNextLink>
-              </li>
-            ))}
-          </motion.ul>
+          <ContactAnimation
+            setHasScrolled={setHasScrolled}
+            hasScrolled={hasScrolled}
+            settings={settings}
+            soMeColors={soMeColors}
+            iconText={iconText}
+          />
         </div>
 
         <a
